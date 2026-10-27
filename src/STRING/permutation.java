@@ -1,4 +1,4 @@
-package Reccursion;
+package STRING;
 import java.util.ArrayList;
 public class permutation {
 

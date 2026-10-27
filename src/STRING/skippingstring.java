@@ -1,4 +1,4 @@
-package Reccursion;
+package STRING;
 
 public class skippingstring {
 
