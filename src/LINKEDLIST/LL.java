@@ -24,6 +24,14 @@ public class LL {
         }
     }
 
+    public Node get(int index){
+        Node temp = head;
+        for(int i =0 ; i<index;i++){
+            temp = temp.next ;
+        }
+        return temp ;
+    }
+
     public void insertfirst(int value) {
 
         Node node = new Node(value);
@@ -76,68 +84,89 @@ public class LL {
         size++;
 
     }
+    public int deletefirst(){
 
-    public void delete(int index){
-        if(index == 0){
-            if (head==null){
-                System.out.println("no element");
-                return;
-            }
+        int val = head.value;
 
-            head=head.next;
-            if (head == null) {
-                tail = null;
-            }
-            size--;
-            return;
+        head=head.next;
+        if (head == null) {
+            tail = null;
         }
-        if (index == size-1){
-            if (tail==null){
-                System.out.println("no element");
-                return;
-            }
-            Node temp = head;
-            while(temp.next !=tail){
-                temp=temp.next;
-            }
-            tail=temp;
-            tail.next=null;
-            size--;
-            return;
-        }
-        Node temp =head;
-        for(int i=0;i<index-1;i++){
-            temp=temp.next;
-        }
-        Node temp2 = temp.next;
-        temp.next=temp2.next;
         size--;
+        return val;
+    }
 
+    public int deletelast(){
+            if (size<=1){
+                return deletefirst();
+            }
+
+            Node secondlast = get(size-2);
+            int val = tail.value;
+            tail = secondlast;
+            secondlast.next=null;
+            size--;
+            return val;
+
+    }
+    public int  delete(int index){
+
+        //delete first
+
+
+        if(index == 0){
+            return deletefirst();
+
+        }
+
+        //Delete Last
+
+
+        if (index == size-1){
+            return deletelast();
+        }
+
+        //Delete any part
+
+        Node prev = get(index -1);
+        int val = prev.next.value;
+        prev.next=prev.next.next;
+        size--;
+        return val;
     }
 
 
     static void main(String[] args) {
 
         LL list = new LL();
+
+        //INSERT
+
         list.insertfirst(4);
         list.insertfirst(3);
         list.insertfirst(2);
         list.insertfirst(1);
-
         list.insertlast(5);
-
         list.insert(7, 3);
 
+        //DELETE
+
         list.display();
         System.out.println();
-        list.delete(0);
+
+        System.out.println(list.deletefirst());
         list.display();
+
         System.out.println();
-        list.delete(list.size -1);
+
+        System.out.println(list.deletelast());
         list.display();
+
         System.out.println();
-        list.delete(3);
+
+        System.out.println(list.delete(2));
         list.display();
+        
     }
 
 
